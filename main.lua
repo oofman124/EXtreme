@@ -15,7 +15,7 @@ local logo = Instance.new("TextLabel")
 local player = game.Players.LocalPlayer
 local character = player.Character
 local commands = {
-	"re", "delgui", "tptool", "rejoin", "lesslag"
+	"re", "delgui", "tptool", "rejoin", "lesslag", "toolmouse"
 }
 
 local mouse = player:GetMouse()
@@ -107,6 +107,17 @@ function lesslag()
 	end
 end
 
+function toolmouse()
+	for i,v in ipairs(character:GetChildren()) do
+		if v:IsA("Tool") then
+			while wait() do
+				if v == nil then return end
+				v.Grip = CFrame.new(v:WaitForChild("Handle").Position, mouse.Hit.Position).Rotation
+			end
+		end
+	end
+	
+end
 --event
 
 cmdbar.InputEnded:Connect(command)
