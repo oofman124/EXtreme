@@ -14,8 +14,13 @@ local UICorner = Instance.new("UICorner")
 local logo = Instance.new("TextLabel")
 local player = game.Players.LocalPlayer
 local character = player.Character
-local commands = {"re", "delgui", "tptool"}
+local commands = {
+	"re", "delgui", "tptool", "rejoin", "lesslag"
+}
+
 local mouse = player:GetMouse()
+
+
 --Properties:
 
 EXtreme.Name = "EXtreme"
@@ -86,6 +91,21 @@ function tptool()
 	
 end
 
+function rejoin()
+	local ts = game:GetService("TeleportService")
+
+	local p = player
+
+	ts:Teleport(game.PlaceId, p)
+end
+
+function lesslag()
+	for i,v in ipairs(workspace:GetChildren()) do
+		if v:IsA("BasePart") then
+			v.Material = Enum.Material.Plastic
+		end
+	end
+end
 
 --event
 
