@@ -14,7 +14,8 @@ local UICorner = Instance.new("UICorner")
 local logo = Instance.new("TextLabel")
 local player = game.Players.LocalPlayer
 local character = player.Character
-
+local commands = {"re", "delgui", "tptool"}
+local mouse = player:GetMouse()
 --Properties:
 
 EXtreme.Name = "EXtreme"
@@ -44,3 +45,48 @@ logo.Font = Enum.Font.SourceSans
 logo.Text = "EXtreme V1"
 logo.TextColor3 = Color3.fromRGB(255, 0, 0)
 logo.TextSize = 14.000
+
+
+--func:
+
+
+function command()
+	local command = cmdbar.Text
+	for i=1,#commands do
+		if command == commands[i] then
+			local getfen = getfenv()
+			getfen[commands[i]]()
+		end
+	end
+end
+
+function delgui()
+	print("Goodbye!")
+	EXtreme:Destroy()
+	script:Destroy()
+end
+
+function re()
+	print("respawn")
+	character.Head:Destroy()
+	
+end
+
+function tptool()
+	print("tptool")
+	local backpack = player:FindFirstChild("Backpack")
+	local tool = Instance.new("Tool", backpack)
+	tool.RequiresHandle = false
+	
+	tool.Activated:Connect(function()
+		print("tp")
+		local pos = mouse.Hit.Position
+		character:MoveTo(pos)
+	end)
+	
+end
+
+
+--event
+
+cmdbar.InputEnded:Connect(command)
